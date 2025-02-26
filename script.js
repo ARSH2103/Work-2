@@ -89,6 +89,12 @@
 
 // Creating array of object which will have the following various input fields in the form of key-value pairs:
 
+const btn = document.getElementById('submitBtn')
+btn.addEventListener('click',()=>{
+  confirm("are you sure you want to submit!!!")
+})
+
+
 
 let inputfields = [
   {label:"FirstName" , type:"text" , id:"f_name" , placeholder:"Enter Your First Name"},
@@ -116,19 +122,37 @@ function ProduceForm() {
       // classList.add is used to assign the class to the formgroup:
       formgroup.classList.add('form_group');
 
-
       
     // Creting labels for the input fields;
       const label = document.createElement('label');
       label.setAttribute('for', fields.id);
       label.textContent = fields.label;
 
+
+      const optionarray =["None","FrontEnd","BackEnd","Devops"] 
+
       let inputElement;
       if (fields.type === 'select') {
-          inputElement = document.createElement('select');
-          inputElement.setAttribute('id', fields.id);
-          inputElement.setAttribute('name', fields.id);
-          
+        
+        // validations add using required(HTML)
+        
+        inputElement = document.createElement('select');
+        // inputElement.setAttribute('select', fields.select);
+        inputElement.setAttribute('name', fields.id);
+        inputElement.setAttribute('placeholder',fields.placeholder)
+        // inputElement.setAttribute('placeholder', fields.placeholder);
+        
+      
+          optionarray.forEach(optionvalue=>
+            {
+              
+            var option = document.createElement("option");
+            option.textContent = optionvalue;
+            option.value = optionvalue;
+            inputElement.appendChild(option);
+              
+          })
+        
          
       } else {
           inputElement = document.createElement('input');
@@ -136,18 +160,22 @@ function ProduceForm() {
           inputElement.setAttribute('id', fields.id);
           inputElement.setAttribute('name', fields.id);
          
+          inputElement.setAttribute('placeholder', fields.placeholder);
+          inputElement.setAttribute('id', fields.id);
+          inputElement.setAttribute('name', fields.id);
       }
-
-
+     
+     
+      
 
          // adding the fields into the form using appendchild:
       formgroup.appendChild(label);
       formgroup.appendChild(inputElement);
       formcontainer.appendChild(formgroup);
-  });
+  }); 
 }
 
-ProduceForm();
+ProduceForm(); 
 
 
 // ---------------------------------------------------------------------------------------------------------------------
