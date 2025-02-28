@@ -89,10 +89,11 @@
 
 // Creating array of object which will have the following various input fields in the form of key-value pairs:
 
-const btn = document.getElementById('submitBtn')
-btn.addEventListener('click',()=>{
-  confirm("are you sure you want to submit!!!")
-})
+// const btn = document.getElementById('submitBtn')
+// btn.addEventListener('sumbit',()=>{
+//   const validate = document.getElementById('field.id');
+//   if()
+// })
 
 
 
@@ -101,7 +102,7 @@ let inputfields = [
   {label:"LastName" , type:"text" , id:"l_name" , placeholder:"Enter Your Last Name"},
   {label:"Email" , type:"email" , id:"email" , placeholder:"Enter Your Email"},
   {label:"Contact No" , type:"number" , id:"c_no" , placeholder:"Enter Your Contact NO"},
-  {label:"JobRole" , type:"select" , id:"job_role" , options:["None","FrontEnd","BackEnd","DevOps"]},
+  {label:"JobRole" , type:"select" , id:"job_role",placeholder:"Enter the jobRole"},
   {label:"Address" , type:"text" , id:"address" , placeholder:"Enter Your Address"},
   {label:"City" , type:"text" , id:"city" , placeholder:"Enter Your Address"},
   {label:"PinCode" , type:"text" , id:"pincode" , placeholder:"Enter Your Address"},
@@ -173,6 +174,9 @@ function ProduceForm() {
       formgroup.appendChild(inputElement);
       formcontainer.appendChild(formgroup);
   }); 
+
+
+
 }
 
 ProduceForm(); 
