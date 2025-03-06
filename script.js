@@ -1,220 +1,94 @@
 
-// WITHOUT USING FOREACH LOOP ANT THATS WHAT THE MISTAKE MADE BY ME :
-
-// Creating array of object which will have the following various input fields in the form of key-value pairs:
-
-// let inputfields = [
-//     {label:"Firstname" , type:"text" , id:"f_name" , placeholder:"Enter Your First Name"},
-//     {label:"Lastname" , type:"text" , id:"l_name" , placeholder:"Enter Your Last Name"},
-//     {label:"Email" , type:"email" , id:"email" , placeholder:"Enter Your Email"},
-//     {label:"JobRole" , type:"select" , id:"job_role" , placeholder:"Enter For the Role" , options:["None","FrontEnd","BackzEnd","Devoops"]},
-//     {label:"Address" , type:"text" , id:"address" , placeholder:"Enter Your Address"},
-// ]
-
-// // lets now keep the track of upcoming further next fields :
-
-// let currentIndex = 0;
-
-
-// // Select the particular elements by Id and store them into a variable:
-
-// const formcontainer = document.getElementById('Dynamic-Form');
-// const submitBtn = document.getElementById('submitBtn');
-
-
-// // Creating a funtion which will produce the form fields:
-
-// function ProduceForm(){
-
-
-    
-    
-
-//     const fields = inputfields[currentIndex];
-
-//     // Creating the element through  the JavaScript and the element is the div :
-//     const formgroup = document.createElement('div');
-//     // classList.add is used to assign the class to the formgroup:
-//     formgroup.classList.add('form_group');
-
-
-//     // Creting labels for the input fields;
-//     const label = document.createElement('label');
-//     label.setAttribute('for',fields.id)
-//     label.textContent = fields.label;
-
-//     // Creating the input fields:
-//     let inputElement;
-    
-//     // Checking for the field input if it select hen creating the select element:
-
-//     if(fields.type == 'select')
-//     {
-//         inputElement = document.createElement('select');
-//         inputElement.setAttribute('id', fields.id);
-//         inputElement.setAttribute('name', fields.name);
-
-
-//     }
-//     // if the fields type is not select then the input fields will be created which means the input will be the [text,no,email....etc].
-//     else
-//     {
-//         inputElement = document.createElement('input')
-//         inputElement.setAttribute('type',fields.type)
-//         inputElement.setAttribute('name',fields.name)
-//         inputElement.setAttribute('id',fields.id)
-//         inputElement.setAttribute('placeholder',fields.placeholder)
-//     }
-    
-
-//     // adding both the fields into the form using appendchild:
-
-//     formgroup.appendChild(inputElement);
-//     formgroup.appendChild(label);
-
-
-//     formcontainer.appendChild(formgroup);
-
-// }
-
-
-// ProduceForm();
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-// Creating array of object which will have the following various input fields in the form of key-value pairs:
-
-// const btn = document.getElementById('submitBtn')
-// btn.addEventListener('sumbit',()=>{
-//   const validate = document.getElementById('field.id');
-//   if()
-// })
-
-
+// Creating array of object named as inputFields.
 
 let inputfields = [
-  {label:"FirstName" , type:"text" , id:"f_name" , placeholder:"Enter Your First Name"},
-  {label:"LastName" , type:"text" , id:"l_name" , placeholder:"Enter Your Last Name"},
-  {label:"Email" , type:"email" , id:"email" , placeholder:"Enter Your Email"},
-  {label:"Contact No" , type:"number" , id:"c_no" , placeholder:"Enter Your Contact NO"},
-  {label:"JobRole" , type:"select" , id:"job_role",placeholder:"Enter the jobRole"},
-  {label:"Address" , type:"text" , id:"address" , placeholder:"Enter Your Address"},
-  {label:"City" , type:"text" , id:"city" , placeholder:"Enter Your Address"},
-  {label:"PinCode" , type:"text" , id:"pincode" , placeholder:"Enter Your Address"},
-  {label:"Date" , type:"date" , id:"date" , placeholder:"Enter Your Address"},
-  {label:"UpLoadCV" , type:"file" , id:"UpLoadCV" , placeholder:"Enter Your Address"},
+  { label: "First Name", type: "text", id: "f_name", placeholder: "Enter Your First Name", required: true, minLength: 2, maxLength: 30 },
+  { label: "Last Name", type: "text", id: "l_name", placeholder: "Enter Your Last Name", required: true, minLength: 2, maxLength: 30 },
+  { label: "Email", type: "email", id: "email", placeholder: "Enter Your Email", required: true, pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" },
+  { label: "Contact No", type: "number", id: "c_no", placeholder: "Enter Your Contact No", required: true, minLength: 10, maxLength: 10 },
+  { label: "Job Role", type: "select", id: "job_role", placeholder: "Enter the Job Role", required: true },
+  { label: "Address", type: "text", id: "address", placeholder: "Enter Your Address", required: true, minLength: 5 },
+  { label: "City", type: "text", id: "city", placeholder: "Enter Your City", required: true },
+  { label: "Pin Code", type: "text", id: "pincode", placeholder: "Enter Your Pin Code", required: true, pattern: "^[0-9]{6}$" },
+  { label: "Date", type: "date", id: "date", placeholder: "Enter Date", required: true },
+  { label: "Upload CV", type: "file", id: "UpLoadCV", placeholder: "Upload Your CV", required: true, accept: ".pdf,.doc,.docx" }
 ];
 
-const formcontainer = document.getElementById('Dynamic-Form');
+
+// Creating the variable named as teh formcontainer.
+const formcontainer = document.getElementById("Dynamic-Form");
 
 
-// Creating a funtion which will produce the form fields:
+// creating a function which will Produce the form Dynamically.
 
 function ProduceForm() {
-  inputfields.forEach(fields => 
-    {
-      // Creating the element through  the JavaScript and the element is the div :
-      const formgroup = document.createElement('div');
-      // classList.add is used to assign the class to the formgroup:
-      formgroup.classList.add('form_group');
-
-      
-    // Creting labels for the input fields;
-      const label = document.createElement('label');
-      label.setAttribute('for', fields.id);
-      label.textContent = fields.label;
+  const form = document.createElement("form");
+  form.setAttribute("id", "dynamicForm");
 
 
-      const optionarray =["None","FrontEnd","BackEnd","Devops"] 
+  // Iterating the fields and creating the div for independent fields.
+  inputfields.forEach((fields) => {
+    const formgroup = document.createElement("div");
+    formgroup.classList.add("form_group");
 
-      let inputElement;
-      if (fields.type === 'select') {
-        
-        // validations add using required(HTML)
-        
-        inputElement = document.createElement('select');
-        // inputElement.setAttribute('select', fields.select);
-        inputElement.setAttribute('name', fields.id);
-        inputElement.setAttribute('placeholder',fields.placeholder)
-        // inputElement.setAttribute('placeholder', fields.placeholder);
-        
-      
-          optionarray.forEach(optionvalue=>
-            {
-              
-            var option = document.createElement("option");
-            option.textContent = optionvalue;
-            option.value = optionvalue;
-            inputElement.appendChild(option);
-              
-          })
-        
-         
-      } else {
-          inputElement = document.createElement('input');
-          inputElement.setAttribute('type', fields.type);
-          inputElement.setAttribute('id', fields.id);
-          inputElement.setAttribute('name', fields.id);
-         
-          inputElement.setAttribute('placeholder', fields.placeholder);
-          inputElement.setAttribute('id', fields.id);
-          inputElement.setAttribute('name', fields.id);
-      }
+
+    // Creating lables for the fields.
+    const label = document.createElement("label");
+    label.setAttribute("for", fields.id);
+    label.textContent = fields.label;
+
+
+
+    // Creating inout fields and checking if the input field is select or diff.
+    let inputElement;
+    if (fields.type === "select") {
+      inputElement = document.createElement("select");
+      inputElement.setAttribute("name", fields.id);
+      inputElement.setAttribute("required", "true");
+
+
+      // Creating options array which will be provided for the select field.
+      const optionarray = ["None", "FrontEnd", "BackEnd", "DevOps"];
+      optionarray.forEach((optionvalue) => {
+        let option = document.createElement("option");
+        option.textContent = optionvalue;
+        option.value = optionvalue;
+        inputElement.appendChild(option);
+      });
+
+
+
+    } 
+    else {
+      inputElement = document.createElement("input");
+      inputElement.setAttribute("type", fields.type);
+      inputElement.setAttribute("id", fields.id);
+      inputElement.setAttribute("name", fields.id);
+      inputElement.setAttribute("placeholder", fields.placeholder);
+      inputElement.setAttribute("required", fields.required);
+
      
-     
-      
-
-         // adding the fields into the form using appendchild:
-      formgroup.appendChild(label);
-      formgroup.appendChild(inputElement);
-      formcontainer.appendChild(formgroup);
-  }); 
+    }
 
 
+    // Appending the various different fields into the form.
+    formgroup.appendChild(label);
+    formgroup.appendChild(inputElement);
+    form.appendChild(formgroup);
+  });
 
+  // Creating Apply Now btn.
+  const submitButton = document.createElement("button");
+  submitButton.setAttribute("type", "submit");
+  submitButton.textContent = "Apply Now";
+  form.appendChild(submitButton);
+
+  formcontainer.appendChild(form);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+  });
 }
 
-ProduceForm(); 
-
-
-// ---------------------------------------------------------------------------------------------------------------------
-//  CODE SNIPPET GIVEN BY MAAM ::::::
-
-
-// function renderInputs(options, containerId) {
-//   const container = document.getElementById(containerId);
-//   container.innerHTML = ''; // Clear previous content
- 
-//   options.forEach(option => {
-//     const input = document.createElement('input');
-//     input.type = 'text';
-//     input.name = option.name;
-//     input.placeholder = option.label;
- 
-//     const label = document.createElement('label');
-//     label.textContent = option.label + ':          ';
-//     label.for = option.name;
-    
- 
-//     const div = document.createElement('div');
-//     div.appendChild(label);
-//     div.appendChild(input);
-//     container.appendChild(div);
-//   });
-// }
- 
-// // Example usage:
-// const inputOptions = [
-//   { name: 'firstName', label: 'First Name' },
-//   { name: 'lastName', label: 'Last Name' },
-//   { name: 'email', label: 'Email' },
-
-
-// ];
- 
-// renderInputs(inputOptions, 'input-container');
+ProduceForm();
